@@ -1,6 +1,6 @@
 # Access the data
 
-DIEMO aggregates the data of charging point operators in real-time. The data is available as:
+ich-tanke-strom.ch aggregates the data of charging point operators in real-time. The data is available as:
 
 * JSON/GeoJSON-Files
 * Web-Service
@@ -30,6 +30,6 @@ https://data.geo.admin.ch/ch.bfe.ladestellen-elektromobilitaet/data/ch.bfe.lades
 ## Data model
 See [OICP 2.3](https://github.com/hubject/oicp/tree/master/OICP-2.3/OICP%202.3%20CPO)
 
-## Web-Service
+## Web-Service / Feature-API
 
-See [How to query the DIEMO-API](https://github.com/SFOE/DIEMO-Documentation/blob/master/How%20to%20query%20DIEMO.md)
+See [How to query the ich-tanke-strom.ch-Feature-API](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/How%20to%20query%20ich%20tanke%20strom.md)
