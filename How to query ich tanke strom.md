@@ -80,18 +80,28 @@ Additionally, [Plug like Type 2](http://ich-tanke-strom-int.switzerlandnorth.clo
 
 ### Example 1
 
-[Search for “ich” in the field “City” (infix match)](https://api3.geo.admin.ch/rest/services/all/MapServer/find?layer=ch.bfe.ladestellen-elektromobilitaet&searchText=ich&searchField=City&returnGeometry=false)
+Search for “ich” in the field “City” (infix match)
 
 ```
-https://api3.geo.admin.ch/rest/services/all/MapServer/find?
-layer=ch.bfe.ladestellen-elektromobilitaet&
-searchText=ich&
-searchField=City&
-returnGeometry=false
+&cql_filter = city ILIKE '%ich%'
 ```
 
-Additionally, [IsOpen24Hours is true](https://api3.geo.admin.ch/rest/services/all/MapServer/find?layer=ch.bfe.ladestellen-elektromobilitaet&searchText=ich&searchField=City&returnGeometry=false&layerDefs={%22ch.bfe.ladestellen-elektromobilitaet%22:%20%22IsOpen24Hours%20is%20true%22})
+Additionally, IsOpen24Hours is true
 
 ```
-&layerDefs={"ch.bfe.ladestellen-elektromobilitaet": "IsOpen24Hours is true"}
+&cql_filter = city ILIKE '%ich%' AND IsOpen24Hours = true
 ```
+### Examples of nested attributes
+
+[All charging stations with ChargingFacilities.Power > 22](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=ChargingFacilities.Power%20%3E%2022)
+
+```
+&cql_filter = ChargingFacilities.Power > 22
+```
+
+[All charging stations with "Gemeinde" in ChargingStationNames:](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=ChargingStationNames.value%20ilike%20%27%25Gemeinde%25%27)
+
+```
+&cql_filter = ChargingStationNames.value ilike '%Gemeinde%'
+```
+
