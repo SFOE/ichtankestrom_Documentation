@@ -15,90 +15,64 @@
 | number |  =, <>, >, <, >=, <= |  |
 | boolean | = true, = false | IsOpen24Hours = true |
 
+There are two functionalities of the API:
+* **Identify**: Used to retrieve charging stations at / near a specified location. Additionally, it can be searched / filtered by attributes of the charging stations. 
+* **Find**: Used to search / filter for attributes of the charging stations. The exact location of the charging stations is not taken into account.
 
 ## Identify examples (discover features at a specific location)
 
 ### Example 1
 
-[Stations within a distance of 300 m from coordinate 2'600'000 / 1'200'000](https://api3.geo.admin.ch/rest/services/all/MapServer/identify?geometry=2600000,1200000&mapExtent=0,0,100,100&imageDisplay=100,100,100&geometryFormat=geojson&geometryType=esriGeometryPoint&lang=fr&layers=all:ch.bfe.ladestellen-elektromobilitaet&returnGeometry=true&tolerance=300&sr=2056)
+[Stations within a distance of 300 m from coordinate 48.0, 12.0](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters))
 
 ```
-https://api3.geo.admin.ch/rest/services/all/MapServer/identify?
-geometry=2600000,1200000&
-mapExtent=0,0,100,100&
-imageDisplay=100,100,100&
-geometryFormat=geojson&
-geometryType=esriGeometryPoint&
-lang=de&
-layers=all:ch.bfe.ladestellen-elektromobilitaet&
-returnGeometry=true&
-tolerance=300&
-sr=2056
+http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?
+service=WFS&
+version=1.0.0&
+request=GetFeature&
+typeName=ich-tanke-strom%3Aevse&
+maxFeatures=50&
+outputFormat=application%2Fjson&
+cql_filter=DWithin(geometry,POINT(12%2048),300,meters)
 ```
 
-Additionally, [IsOpen24Hours is true](https://api3.geo.admin.ch/rest/services/all/MapServer/identify?geometry=2600000,1200000&mapExtent=0,0,100,100&imageDisplay=100,100,100&geometryFormat=geojson&geometryType=esriGeometryPoint&lang=fr&layers=all:ch.bfe.ladestellen-elektromobilitaet&returnGeometry=true&tolerance=300&sr=2056&layerDefs={%22ch.bfe.ladestellen-elektromobilitaet%22:%22IsOpen24Hours%20is%20true%22})
+Additionally, [IsOpen24Hours = true](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)AND%20IsOpen24Hours=true)
 
 ```
-&layerDefs={"ch.bfe.ladestellen-elektromobilitaet": "IsOpen24Hours is true"}
+&cql_filter = DWithin(geometry,POINT(12 48),300,meters) AND IsOpen24Hours=true
 ```
-Additionally, [Authentication with NFC](https://api3.geo.admin.ch/rest/services/all/MapServer/identify?geometry=2600000,1200000&mapExtent=0,0,100,100&imageDisplay=100,100,100&geometryFormat=geojson&geometryType=esriGeometryPoint&lang=fr&layers=all:ch.bfe.ladestellen-elektromobilitaet&returnGeometry=true&tolerance=300&sr=2056&layerDefs={%22ch.bfe.ladestellen-elektromobilitaet%22:%20%22IsOpen24Hours%20is%20true%22,%20%22ch.bfe.ladestellen-elektromobilitaet%22:%22QueryAuthenticationModes%20ilike%20%27%nfc%%27%22})
+Additionally, [Authentication with NFC](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)%20AND%20IsOpen24Hours=true%20AND%20AuthenticationModes%20ILIKE%20%27%25nfc%25%27)
 
 ```
-&layerDefs={
-"ch.bfe.ladestellen-elektromobilitaet": "IsOpen24Hours is true", 
-"ch.bfe.ladestellen-elektromobilitaet": "QueryAuthenticationModes ilike '%nfc%'"}
-```
-
-Additionally, [Longitude > 7.43842](https://api3.geo.admin.ch/rest/services/all/MapServer/identify?geometry=2600000,1200000&mapExtent=0,0,100,100&imageDisplay=100,100,100&geometryFormat=geojson&geometryType=esriGeometryPoint&lang=fr&layers=all:ch.bfe.ladestellen-elektromobilitaet&returnGeometry=true&tolerance=300&sr=2056&layerDefs={%22ch.bfe.ladestellen-elektromobilitaet%22:%20%22IsOpen24Hours%20is%20true%22,%20%22ch.bfe.ladestellen-elektromobilitaet%22:%22QueryAuthenticationModes%20ilike%20%27%nfc%%27%22,%20%22ch.bfe.ladestellen-elektromobilitaet%22:%22Longitude%20%3E%207.43842%22})
-
-```
-&layerDefs={
-"ch.bfe.ladestellen-elektromobilitaet": "IsOpen24Hours is true", 
-"ch.bfe.ladestellen-elektromobilitaet": "QueryAuthenticationModes ilike '%nfc%'", 
-"ch.bfe.ladestellen-elektromobilitaet": "Longitude > 7.43842"}
+&cql_filter = DWithin(geometry,POINT(12 48),300,meters) AND IsOpen24Hours=true AND AuthenticationModes ilike '%nfc%'
 ```
 
 ### Example 2
 
-[Identify all the features intersecting an bounding box around the village Puidoux](https://api3.geo.admin.ch/rest/services/api/MapServer/identify?geometryType=esriGeometryEnvelope&geometry=2547800,1148679,2549444,1150013&imageDisplay=3600,2400,96&mapExtent=2480000,170000,2840000,1310000&tolerance=0&layers=all:ch.bfe.ladestellen-elektromobilitaet&sr=2056)
+[Identify all the features intersecting an bounding box around the village Puidoux](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=bbox(geometry,11,48,12,59))
 
 ```
-https://api3.geo.admin.ch/rest/services/api/MapServer/identify?
-geometryType=esriGeometryEnvelope&
-geometry=2547800,1148679,2549444,1150013&
-imageDisplay=3600,2400,96&
-mapExtent=2480000,170000,2840000,1310000&
-tolerance=0&
-layers=all:ch.bfe.ladestellen-elektromobilitaet&
-sr=2056
+&cql_filter = bbox(geometry,11,48,12,49)
 ```
 
-Additionally, [Plug like Type 2](
-https://api3.geo.admin.ch/rest/services/api/MapServer/identify?geometryType=esriGeometryEnvelope&geometry=2547800,1148679,2549444,1150013&imageDisplay=3600,2400,96&mapExtent=2480000,170000,2840000,1310000&tolerance=0&layers=all:ch.bfe.ladestellen-elektromobilitaet&sr=2056&layerDefs={%22ch.bfe.ladestellen-elektromobilitaet%22:%20%22QueryPlugs%20ilike%20%27%Type%202%%27%22})
+Additionally, [Plug like Type 2](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=bbox(geometry,11,48,12,59)%20AND%20Plugs%20ILIKE%20%27%25Type%202%25%27)
 
 ```
-&layerDefs={"ch.bfe.ladestellen-elektromobilitaet": "QueryPlugs ilike '%Type 2%'"}
+&cql_filter = bbox(geometry,11,48,12,49) AND Plugs ilike '%Type 2%'
 ```
 
 ### Example 3
 
-[Identify all the features intersecting an polygon around Chur](https://api3.geo.admin.ch/rest/services/api/MapServer/identify?geometryType=esriGeometryPolygon&geometry={%22rings%22%20:%20[[%20[2758610,1196685],%20[2765510,1188085],%20[2750210,1188135],%20[2758610,1196685]]]}&imageDisplay=3600,2400,96&mapExtent=2480000,170000,2840000,1310000&tolerance=0&layers=all:ch.bfe.ladestellen-elektromobilitaet&sr=2056)
+[Identify all the features intersecting an polygon](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=Intersects(geometry,POLYGON((11%2045,%2012%2045,%2012%2050,%2011%2050,%2011%2045))))
 
 ```
-https://api3.geo.admin.ch/rest/services/api/MapServer/identify?
-geometryType=esriGeometryPolygon&
-geometry={"rings" : [[ [2758610,1196685], [2765510,1188085], [2750210,1188135], [2758610,1196685]]]}&
-imageDisplay=3600,2400,96&
-mapExtent=2480000,170000,2840000,1310000&
-tolerance=0&
-layers=all:ch.bfe.ladestellen-elektromobilitaet&
-sr=2056
+&cql_filter = Intersects(geometry,POLYGON((11 45, 12 45, 12 50, 11 50, 11 45)))
 ```
 
-Additionally, [Plug like Type 2](https://api3.geo.admin.ch/rest/services/api/MapServer/identify?geometryType=esriGeometryPolygon&geometry={%22rings%22%20:%20[[%20[2758610,1196685],%20[2765510,1188085],%20[2750210,1188135],%20[2758610,1196685]]]}&imageDisplay=3600,2400,96&mapExtent=2480000,170000,2840000,1310000&tolerance=0&layers=all:ch.bfe.ladestellen-elektromobilitaet&sr=2056&layerDefs={%22ch.bfe.ladestellen-elektromobilitaet%22:%20%22QueryPlugs%20ilike%20'%Type%202%'%22})
+Additionally, [Plug like Type 2](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=Intersects(geometry,POLYGON((11%2045,%2012%2045,%2012%2050,%2011%2050,%2011%2045)))%20AND%20Plugs%20ILIKE%20%27%25Type%202%25%27)
 
 ```
-&layerDefs={"ch.bfe.ladestellen-elektromobilitaet": "QueryPlugs ilike '%Type 2%'"}
+&cql_filter = Intersects(geometry,POLYGON((11 45, 12 45, 12 50, 11 50, 11 45))) AND Plugs ilike '%Type 2%'
 ```
 
 
