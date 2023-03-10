@@ -1,23 +1,19 @@
-# How to query the DIEMO-API
-
-## Available services
-
-All services of [api3.geo.admin.ch](http://api3.geo.admin.ch/services/sdiservices.html) are available. To query the National Data Infrastructure For Electromobility, two services are of special interest:
-* [Identify](http://api3.geo.admin.ch/services/sdiservices.html#identify-features): This service can be used to discover charging points at a specific location. Additionally, attributes can be searched. Use the layerDefs-functionality to query specific attributes.
-* [Find](http://api3.geo.admin.ch/services/sdiservices.html#find): This service is used to search the attributes of charging points. The specific location of features is not taken into account. Use the layerDefs-functionality to query specific attributes.
+# How to query the ich-tanke-strom-Feature-API
 
 ## General remarks
-* There is a limit of 200 results per query
-* [List of available queryable attributes](https://api3.geo.admin.ch/rest/services/all/MapServer/ch.bfe.ladestellen-elektromobilitaet?lang=de)
-* The layerDefs-functionality does not support **OR** and string search is not case sensistive
-* layerDefs is adapted from [ESRI](https://developers.arcgis.com/rest/services-reference/identify-map-service-.htm)
 
+* [Common Query Language](https://docs.geoserver.org/latest/en/user/tutorials/cql/cql_tutorial.html) and [Filter-Functions](https://docs.geoserver.org/latest/en/user/filter/function_reference.html#filter-function-reference)
+* [Filter Function Reference](https://docs.geoserver.org/latest/en/user/filter/function_reference.html#filter-function-reference) and [ECQL Reference](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#filter-ecql-reference)
+* Multiple filters can be combined with `OR` or `AND`
+* Arithmetic expressions calculated with `+, -, *, /` can be used on the left and/or right side of an operator
+* `%` as wildcard for string comparisons (note: must be encoded correctly as `%25` for queries in URL)
+* Nested attributes can be used with ".", e.g. ChargingFacilities.Power > 22
 
 | Data type    | Operators | Examples |
 | --------------- | --------- |--------- |
-| varchar | =, +=, like, ilike, not like, not ilike, is null, is not null | toto ='3455 Kloten', toto ilike '%SH%', toto is null, toto ilike 'SH%' |
-| number |  =, <, >, >=, <=, != | tutu >= 2.4, tutu < 5 |
-| boolean | is (true\|false), is not (true\|false) | tata is not false |
+| string | =, like, ilike, in, is null, not like, not ilike (% als Wildcard) | city = ‘Zürich', city ilike ‘%ich’, city in (’Bern', 'Zürich') |
+| number |  =, <>, >, <, >=, <= |  |
+| boolean | = true, = false | IsOpen24Hours = true |
 
 
 ## Identify examples (discover features at a specific location)
