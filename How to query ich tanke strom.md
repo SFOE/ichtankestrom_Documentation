@@ -7,7 +7,7 @@
 * Multiple filters can be combined with `OR` or `AND`
 * Arithmetic expressions calculated with `+, -, *, /` can be used on the left and/or right side of an operator
 * `%` as wildcard for string comparisons (note: must be encoded correctly as `%25` for queries in URL)
-* Nested attributes can be used with ".", e.g. ChargingFacilities.Power > 22
+* Nested attributes can be used with ".", e.g. `ChargingFacilities.Power > 22`
 
 | Data type    | Operators | Examples |
 | --------------- | --------- |--------- |
