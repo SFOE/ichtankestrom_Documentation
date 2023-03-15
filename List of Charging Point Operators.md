@@ -2,46 +2,48 @@
 
 ## CPOs with realtime data of availability
 
-| Charging Point Operator | Start Date | Included networks
-| --- | --- | ---
-| eCarUp | 20.07.2020 |
-| Eniwa | 25.09.2019 |
-| en mobilecharge | 14.06.2021 |
-| EVA E-Mobilität | 14.06.2021 |
-| EWAcharge | 14.06.2021 |
-| Fastned | 20.01.2021 | 
-| GreenMotion | 25.09.2019 |
-| IBC | 14.06.2021 |
-| mobilecharge | 14.06.2021 |
-| Mobimo emobility | 14.06.2021 |
-| Move | 25.09.2019 |
-| PAC e-moblity | 14.06.2021 |
-| PARK & CHARGE | 14.06.2021 |
-| Plug'n Roll | 25.09.2019 |
-| S-Charge | 14.06.2021 |
-| Swisscharge | 25.09.2019 | ewz
-
+| Operator ID | Charging Point Operator | Start Date | Included networks
+| --- | --- | --- | ---
+| CH*AIL | AIL | 30.11.2022 |
+| CH*CCC | Move | 25.09.2019 |
+| CH*ECU | eCarUp | 20.07.2020 |
+| CH*ENMOBILECHARGE | en mobilecharge | 14.06.2021 |
+| CH*EVAEMOBILITAET | EVA E-Mobilität | 14.06.2021 |
+| CH*EWACHARGE | EWAcharge | 14.06.2021 |
+| CH*FASTNED | Fastned | 20.01.2021 | 
+| CHEVP | GreenMotion | 25.09.2019 |
+| CH*IBC | IBC | 14.06.2021 |
+| CH*MOBILECHARGE | mobilecharge | 14.06.2021 |
+| CH*MOBIMOEMOBILITY | Mobimo emobility | 14.06.2021 |
+| CH*PACEMOBILITY | PAC e-moblity | 14.06.2021 |
+| CH*PARKCHARGE | PARK & CHARGE | 14.06.2021 |
+| CH*REP | Plug'n Roll | 25.09.2019 |
+| CH*SCHARGE | S-Charge | 14.06.2021 |
+| CH*SWISSCHARGE | Swisscharge | 25.09.2019 | GoFast
+| CH*TAE | Matterhorn Terminal Täsch | 30.11.2022 | ewz
 
 ## CPOs without realtime data
 
-| Charging Point Operator | Start Date | Included networks
-| --- | --- | ---
-| Backpackers Villa Sonnenhof | 10.12.2019
-| Chocolat Frey AG | 07.11.2019
-| ebs Energie AG | 16.01.2020
-| Elektrizitätswerk Herrliberg | 01.05.2020
-| Elektrizitätswerk Obwalden | 16.12.2019
-| EWD Elektrizitaetswerk Davos AG | 09.09.2020
-| Ionity | 09.09.2020
-| Lidl Schweiz | 13.11.2019
-| Migrol | 15.03.2021
-| Stadt Dietikon | 05.05.2020
-| Tesla Supercharger | 28.02.2020
+| Operator ID | Charging Point Operator | Start Date | Included networks
+| --- | --- | --- | ---
+| CH*AVIA | AVIA | 
+| CH*DIE | Stadt Dietikon | 05.05.2020
+| CH*EBS | ebs Energie AG | 16.01.2020
+| CH*EWD | EWD Elektrizitaetswerk Davos AG | 09.09.2020
+| CH*EWO | Elektrizitätswerk Obwalden | 16.12.2019
+| CH*HER | Elektrizitätswerk Herrliberg | 01.05.2020
+| CH*ION | Ionity | 09.09.2020
+| CH*LIDL | Lidl Schweiz | 13.11.2019
+| CH*MIG | Migrol | 15.03.2021
+| CH*TES | Tesla Supercharger | 28.02.2020
 
 
 ## Deactivated CPOs
 
 | Charging Point Operator | Start Date | End Date
 | --- | --- | ---
+| Backpackers Villa Sonnenhof | 10.12.2019 | 14.03.2023
+| Chocolat Frey AG | 07.11.2019 | 14.03.2023
 | Easy4you | 07.04.2020 | 01.04.2021
+| Eniwa | 25.09.2019 | 31.01.2023
 | Ost-mobil | 07.04.2020 | 01.04.2021
