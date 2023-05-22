@@ -18,9 +18,10 @@
 | CH*PACEMOBILITY | PAC e-moblity | 14.06.2021 |
 | CH*PARKCHARGE | PARK & CHARGE | 14.06.2021 |
 | CH*REP | Plug'n Roll | 25.09.2019 |
+| CH*SCH | Saascharge | 22.05.2023 | |
 | CH*SCHARGE | S-Charge | 14.06.2021 |
-| CH*SWISSCHARGE | Swisscharge | 25.09.2019 | GoFast
-| CH*TAE | Matterhorn Terminal Täsch | 30.11.2022 | ewz
+| CH*SWISSCHARGE | Swisscharge | 25.09.2019 | GoFast|
+| CH*TAE | Matterhorn Terminal Täsch | 30.11.2022 | ewz|
 
 ## CPOs without realtime data
 
