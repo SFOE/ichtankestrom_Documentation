@@ -18,7 +18,8 @@
 | CH*MOBIMOEMOBILITY | Mobimo emobility | 14.06.2021 |
 | CH*PACEMOBILITY | PAC e-moblity | 14.06.2021 |
 | CH*PARKCHARGE | PARK & CHARGE | 14.06.2021 |
-| CH*REP | Plug'n Roll | 25.09.2019 |
+| CH*PNR | PLUG'N ROLL | 12.09.2023 |
+| CH*REP | PLUG'N ROLL | 25.09.2019 |
 | CH*SCH | Saascharge | 22.05.2023 | |
 | CH*SHE | Shell Recharge | 29.06.2023 | |
 | CH*SCHARGE | S-Charge | 14.06.2021 |
