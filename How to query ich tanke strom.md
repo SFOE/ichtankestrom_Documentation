@@ -23,10 +23,10 @@ There are two functionalities of the API:
 
 ### Example 1
 
-[Stations within a distance of 300 m from coordinate 48.0, 12.0](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters))
+[Stations within a distance of 300 m from coordinate 48.0, 12.0](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters))
 
 ```
-http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?
+http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?
 service=WFS&
 version=1.0.0&
 request=GetFeature&
@@ -36,12 +36,12 @@ outputFormat=application%2Fjson&
 cql_filter=DWithin(geometry,POINT(12%2048),300,meters)
 ```
 
-Additionally, [IsOpen24Hours = true](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)AND%20IsOpen24Hours=true)
+Additionally, [IsOpen24Hours = true](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)AND%20IsOpen24Hours=true)
 
 ```
 &cql_filter = DWithin(geometry,POINT(12 48),300,meters) AND IsOpen24Hours=true
 ```
-Additionally, [Authentication with NFC](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)%20AND%20IsOpen24Hours=true%20AND%20AuthenticationModes%20ILIKE%20%27%25nfc%25%27)
+Additionally, [Authentication with NFC](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)%20AND%20IsOpen24Hours=true%20AND%20AuthenticationModes%20ILIKE%20%27%25nfc%25%27)
 
 ```
 &cql_filter = DWithin(geometry,POINT(12 48),300,meters) AND IsOpen24Hours=true AND AuthenticationModes ilike '%nfc%'
@@ -49,13 +49,13 @@ Additionally, [Authentication with NFC](http://ich-tanke-strom-int.switzerlandno
 
 ### Example 2
 
-[Identify all the features intersecting an bounding box around the village Puidoux](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=bbox(geometry,11,48,12,59))
+[Identify all the features intersecting an bounding box around the village Puidoux](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=bbox(geometry,11,48,12,59))
 
 ```
 &cql_filter = bbox(geometry,11,48,12,49)
 ```
 
-Additionally, [Plug like Type 2](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=bbox(geometry,11,48,12,59)%20AND%20Plugs%20ILIKE%20%27%25Type%202%25%27)
+Additionally, [Plug like Type 2](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=bbox(geometry,11,48,12,59)%20AND%20Plugs%20ILIKE%20%27%25Type%202%25%27)
 
 ```
 &cql_filter = bbox(geometry,11,48,12,49) AND Plugs ilike '%Type 2%'
@@ -63,13 +63,13 @@ Additionally, [Plug like Type 2](http://ich-tanke-strom-int.switzerlandnorth.clo
 
 ### Example 3
 
-[Identify all the features intersecting an polygon](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=Intersects(geometry,POLYGON((11%2045,%2012%2045,%2012%2050,%2011%2050,%2011%2045))))
+[Identify all the features intersecting an polygon](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=Intersects(geometry,POLYGON((11%2045,%2012%2045,%2012%2050,%2011%2050,%2011%2045))))
 
 ```
 &cql_filter = Intersects(geometry,POLYGON((11 45, 12 45, 12 50, 11 50, 11 45)))
 ```
 
-Additionally, [Plug like Type 2](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=Intersects(geometry,POLYGON((11%2045,%2012%2045,%2012%2050,%2011%2050,%2011%2045)))%20AND%20Plugs%20ILIKE%20%27%25Type%202%25%27)
+Additionally, [Plug like Type 2](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=Intersects(geometry,POLYGON((11%2045,%2012%2045,%2012%2050,%2011%2050,%2011%2045)))%20AND%20Plugs%20ILIKE%20%27%25Type%202%25%27)
 
 ```
 &cql_filter = Intersects(geometry,POLYGON((11 45, 12 45, 12 50, 11 50, 11 45))) AND Plugs ilike '%Type 2%'
@@ -93,13 +93,13 @@ Additionally, IsOpen24Hours is true
 ```
 ### Examples of nested attributes
 
-[All charging stations with ChargingFacilities.Power > 22](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=ChargingFacilities.Power%20%3E%2022)
+[All charging stations with ChargingFacilities.Power > 22](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=ChargingFacilities.Power%20%3E%2022)
 
 ```
 &cql_filter = ChargingFacilities.Power > 22
 ```
 
-[All charging stations with "Gemeinde" in ChargingStationNames:](http://ich-tanke-strom-int.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=ChargingStationNames.value%20ilike%20%27%25Gemeinde%25%27)
+[All charging stations with "Gemeinde" in ChargingStationNames:](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=ChargingStationNames.value%20ilike%20%27%25Gemeinde%25%27)
 
 ```
 &cql_filter = ChargingStationNames.value ilike '%Gemeinde%'
