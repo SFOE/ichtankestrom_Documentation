@@ -23,6 +23,9 @@ There are two functionalities of the API:
 
 ### Example 1
 
+:warning: **01.11.2023: Please note that distance filter with *DWITHIN* is not working properly at the moment. We try to solve the issue as soon as possible. [More information](https://stackoverflow.com/questions/45333651/geoserver-dwithin-not-filtering-points-correctly).** :warning:
+
+
 [Stations within a distance of 300 m from coordinate 48.0, 12.0](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters))
 
 ```
