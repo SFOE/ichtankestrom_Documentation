@@ -21,36 +21,8 @@ There are two functionalities of the API:
 
 ## Identify examples (discover features at a specific location)
 
+
 ### Example 1
-
-:warning: **01.11.2023: Please note that distance filter with *DWITHIN* is not working properly at the moment. We try to solve the issue as soon as possible. [More information](https://stackoverflow.com/questions/45333651/geoserver-dwithin-not-filtering-points-correctly).** :warning:
-
-
-[Stations within a distance of 300 m from coordinate 48.0, 12.0](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters))
-
-```
-http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?
-service=WFS&
-version=1.0.0&
-request=GetFeature&
-typeName=ich-tanke-strom%3Aevse&
-maxFeatures=50&
-outputFormat=application%2Fjson&
-cql_filter=DWithin(geometry,POINT(12%2048),300,meters)
-```
-
-Additionally, [IsOpen24Hours = true](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)AND%20IsOpen24Hours=true)
-
-```
-&cql_filter = DWithin(geometry,POINT(12 48),300,meters) AND IsOpen24Hours=true
-```
-Additionally, [Authentication with NFC](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=DWithin(geometry,POINT(12%2048),300,meters)%20AND%20IsOpen24Hours=true%20AND%20AuthenticationModes%20ILIKE%20%27%25nfc%25%27)
-
-```
-&cql_filter = DWithin(geometry,POINT(12 48),300,meters) AND IsOpen24Hours=true AND AuthenticationModes ilike '%nfc%'
-```
-
-### Example 2
 
 [Identify all the features intersecting an bounding box around the village Puidoux](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=bbox(geometry,11,48,12,59))
 
@@ -64,7 +36,7 @@ Additionally, [Plug like Type 2](http://ich-tanke-strom.switzerlandnorth.cloudap
 &cql_filter = bbox(geometry,11,48,12,49) AND Plugs ilike '%Type 2%'
 ```
 
-### Example 3
+### Example 2
 
 [Identify all the features intersecting an polygon](http://ich-tanke-strom.switzerlandnorth.cloudapp.azure.com:8080/geoserver/ich-tanke-strom/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ich-tanke-strom%3Aevse&maxFeatures=50&outputFormat=application%2Fjson&cql_filter=Intersects(geometry,POLYGON((11%2045,%2012%2045,%2012%2050,%2011%2050,%2011%2045))))
 
