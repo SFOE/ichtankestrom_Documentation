@@ -7,7 +7,7 @@ The data is received by ich-tanke-strom.ch, aggregated, converted into the targe
 The consolidated data is provided **read-only**. Data consumers can obtain it either via the interface described in this document (OCPI-based JSON) or as GeoJSON. Write access for external data consumers is not intended. Data ownership remains with the respective CPOs.
 
 **Responsible**: Swiss Federal Office of Energy (SFOE), Mobility Section<br>
-**Contact**: [ichtankestrom@bfe.ch](mailto:ichtankestrom@bfe.ch)
+**Contact**: [ich-tanke-strom@bfe.admin.ch](mailto:ich-tanke-strom@bfe.admin.ch).
 
 ## General information
 
