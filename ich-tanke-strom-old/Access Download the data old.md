@@ -32,4 +32,4 @@ See [OICP 2.3](https://github.com/hubject/oicp/tree/master/OICP-2.3/OICP%202.3%2
 
 ## Web-Service / Feature-API
 
-See [How to query the ich-tanke-strom.ch-Feature-API](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/How%20to%20query%20ich%20tanke%20strom.md)
+See [How to query the ich-tanke-strom.ch-Feature-API](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/ich-tanke-strom-old/How%20to%20query%20ich%20tanke%20strom%20old.md)
