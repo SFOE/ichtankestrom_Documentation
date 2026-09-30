@@ -10,6 +10,7 @@ The consolidated data is provided **read-only**. Data consumers can obtain it ei
 **Contact**: [ich-tanke-strom@bfe.admin.ch](mailto:ich-tanke-strom@bfe.admin.ch).
 
 ## General information
+Base URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/
 
 | Topic | Specification |
 |---|---|
