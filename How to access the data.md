@@ -1,4 +1,6 @@
 # Access the data
+> **Note**: The information on this page applies from November 2026. Until then, please use the [current data access](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/ich-tanke-strom-old/Access%20Download%20the%20data%20old).
+
 
 ich-tanke-strom.ch aggregates the data of charging point operators in real-time. The data is available as:
 
