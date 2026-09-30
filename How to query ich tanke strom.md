@@ -1,5 +1,7 @@
 # How to query the ich-tanke-strom-API
 
+> **Note**: The information on this page applies from November 2026. Until then, please use the [current API documentation](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/ich-tanke-strom-old/How%20to%20query%20ich%20tanke%20strom%20old.md).
+
 ich-tanke-strom.ch is the central platform for collecting and providing information on charging infrastructure in Switzerland. The platform receives OCPI data from various Charge Point Operators (CPOs), in particular on locations with their EVSEs, on tariffs and on booking information.
 
 The data is received by ich-tanke-strom.ch, aggregated, converted into the target format OCPI 2.3 and prepared for distribution. Charging point, tariff and booking information from different sources can therefore be queried and processed in a uniform structure.
