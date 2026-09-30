@@ -15,6 +15,8 @@ ich-tanke-strom.ch aggregates the data of charging point operators in real-time.
 
 See [opendata.swiss](https://opendata.swiss/dataset/ladestationen-fuer-elektroautos/) for more information.
 
+Please contact [ich-tanke-strom@bfe.admin.ch](mailto:ich-tanke-strom@bfe.admin.ch) for permission.
+
 ## GeoJSON files
 
 GeoJSON is an open standard for geographic data. The map on [www.ich-tanke-strom.ch](https://www.ich-tanke-strom.ch) is based on these GeoJSON files. The files contain information on the charging points, aggregated into locations, as well as HTML code for the display on the map.
