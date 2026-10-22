@@ -99,15 +99,16 @@ A location describes a physical charging site with one or more charging stations
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `/locations` | List of all visible locations |
-| GET | `/locations/{country_code}/{party_id}/{location_id}` | Single location of a CPO |
+| GET | `BASE_URL/locations` | List of all visible locations |
+| GET | `BASE_URL/locations/{country_code}/{party_id}/{location_id}` | Single location of a CPO |
 
+Base_URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi
 ### Get list
 
 Request:
 
 ```
-GET /locations?limit=100
+GET BASE_URL/locations?limit=100
 ```
 
 Response:
@@ -219,7 +220,7 @@ Example:
 Request:
 
 ```
-GET /locations/CH/ABC/LOC-001
+GET BASE_URL/locations/CH/ABC/LOC-001
 ```
 
 | Path parameter | Format | Description |
@@ -298,15 +299,16 @@ A tariff describes the pricing logic a CPO uses to charge for charging at a conn
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `/tariffs` | List of all valid tariffs |
-| GET | `/tariffs/{country_code}/{party_id}/{tariff_id}` | Single tariff of a CPO |
+| GET | `BASE_URL/tariffs` | List of all valid tariffs |
+| GET | `BASE_URL/tariffs/{country_code}/{party_id}/{tariff_id}` | Single tariff of a CPO |
 
+Base_URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi
 ### Get list
 
 Request:
 
 ```
-GET /tariffs?limit=100
+GET BASE_URL/tariffs?limit=100
 ```
 
 Response:
@@ -379,7 +381,7 @@ Example:
 Request:
 
 ```
-GET /tariffs/CH/ABC/TARIFF-DC-01
+GET Base_URL/tariffs/CH/ABC/TARIFF-DC-01
 ```
 
 | Path parameter | Format | Description |
@@ -441,15 +443,17 @@ This module provides the current occupancy or operating status of individual EVS
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `/status/{country_code}/{party_id}/{location_id}/evses/{evse_uid}` | Get the current status of an EVSE |
-| GET | `/status?date_from={date_from}&limit={limit}` | Current status values since `date_from` |
+| GET | `Base_URL/status/{country_code}/{party_id}/{location_id}/evses/{evse_uid}` | Get the current status of an EVSE |
+| GET | `Base_URL/status?date_from={date_from}&limit={limit}` | Current status values since `date_from` |
+
+Base_URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi
 
 ### Get single status
 
 Request:
 
 ```
-GET /status/CH/GFS/78594/evses/251674
+GET Base_URL/status/CH/GFS/78594/evses/251674
 ```
 
 Response:
@@ -477,7 +481,7 @@ Example:
 Request:
 
 ```
-GET /status?date_from=2026-08-20T15:30:00Z&limit=100
+GET Base_URL/status?date_from=2026-08-20T15:30:00Z&limit=100
 ```
 
 | Parameter | Type | Required | Description |
@@ -613,10 +617,10 @@ sequenceDiagram
 ### Example requests
 
 ```
-GET /locations?limit=100
-GET /tariffs?limit=100
-GET /status/CH/GFS/78594/evses/251674
-GET /status?date_from=2026-08-20T15:30:00Z&limit=100
+GET Base_URL/locations?limit=100
+GET Base_URL/tariffs?limit=100
+GET Base_URL/status/CH/GFS/78594/evses/251674
+GET Base_URL/status?date_from=2026-08-20T15:30:00Z&limit=100
 ```
 
 ## Non-functional requirements
