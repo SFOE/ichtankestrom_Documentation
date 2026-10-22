@@ -1,6 +1,41 @@
 # How to query the ich-tanke-strom-API
 
 > **Note**: The information on this page applies from November 2026. Until then, please use the [current API documentation](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/ich-tanke-strom-old/How%20to%20query%20ich%20tanke%20strom%20old.md).
+>
+> 
+## Table of contents
+
+- [General information](#general-information)
+- [Data flow](#data-flow)
+- [Access](#access)
+- [Conventions](#conventions)
+  - [OCPI response wrapper](#ocpi-response-wrapper)
+  - [Pagination](#pagination)
+  - [Origin and uniqueness](#origin-and-uniqueness)
+- [Locations API](#locations-api)
+  - [Endpoints](#endpoints)
+  - [Get list](#get-list)
+  - [Get single object](#get-single-object)
+  - [Minimal data model](#minimal-data-model)
+- [Tariffs API](#tariffs-api)
+  - [Endpoints](#endpoints-1)
+  - [Get list](#get-list-1)
+  - [Get single object](#get-single-object-1)
+  - [Minimal data model](#minimal-data-model-1)
+- [EVSE Status API](#evse-status-api)
+  - [Endpoints](#endpoints-2)
+  - [Get single status](#get-single-status)
+  - [Get status values since a point in time](#get-status-values-since-a-point-in-time)
+- [Bookings API](#bookings-api)
+- [Error examples](#error-examples)
+  - [Object not found](#object-not-found)
+  - [Invalid parameter](#invalid-parameter)
+  - [Rate limit](#rate-limit)
+- [Data quality and publication rules](#data-quality-and-publication-rules)
+- [Example client workflow](#example-client-workflow)
+  - [Example requests](#example-requests)
+- [Non-functional requirements](#non-functional-requirements)
+- [References](#references)
 
 ich-tanke-strom.ch is the central platform for collecting and providing information on charging infrastructure in Switzerland. The platform receives OCPI data from various Charge Point Operators (CPOs), in particular on locations with their EVSEs, on tariffs and on booking information.
 
