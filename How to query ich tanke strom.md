@@ -1,6 +1,6 @@
 # How to query the ich-tanke-strom-API
 
-> **Note**: The information on this page applies from November 2026. Until then, please use the [current API documentation](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/ich-tanke-strom-old/How%20to%20query%20ich%20tanke%20strom%20old.md).
+> **Note**: The information on this page applies from December 2026. Until then, please use the [current API documentation](https://github.com/SFOE/ichtankestrom_Documentation/blob/main/ich-tanke-strom-old/How%20to%20query%20ich%20tanke%20strom%20old.md).
 >
 > 
 ## Table of contents
@@ -47,10 +47,10 @@ The consolidated data is provided **read-only**. Data consumers can obtain it ei
 **Contact**: [ich-tanke-strom@bfe.admin.ch](mailto:ich-tanke-strom@bfe.admin.ch).
 
 ## General information
-Base URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/
 
 | Topic | Specification |
 |---|---|
+| Base URL | https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/ |
 | API style | REST/JSON, OCPI-based |
 | Role of the NAP (SFOE) | Aggregator and read-only sender |
 | Modules | Locations, tariffs and current EVSE status |
@@ -114,13 +114,39 @@ Every request returns a JSON object with the following fields:
 }
 ```
 
+
 ### Pagination
 
-The number of objects returned can be set with the `limit` parameter. The default is 1000 objects.
+Lists are delivered page by page (pagination according to OCPI). The page size is controlled with `limit`, the position with `offset`. With `date_from`, locations and tariffs can be limited to changes since a given point in time.
 
 | Parameter | Type | Default | Meaning |
 |---|---|---|---|
-| limit | Integer | 1000 | Maximum number of objects returned |
+| limit | Integer | 1000 | Maximum number of objects per page, 1 to 1000. For the EVSE Status API 1 to 5000 (default 5000). |
+| offset | Integer | 0 | Number of objects to skip (locations, tariffs) |
+| date_from | DateTime | – | Only objects with `last_updated` greater than or equal to this UTC timestamp (locations, tariffs). Mandatory for the EVSE Status API, see [Get status values since a point in time](#get-status-values-since-a-point-in-time). |
+
+#### Response
+A list response also contains the following headers:
+
+| Header | Type | Present | Meaning |
+|---|---|---|---|
+| Link | String | If more pages follow | `<URL of the next page>; rel="next"` |
+| X-Total-Count | Integer | Always | Total number of matching objects |
+| X-Limit | Integer | Always | Applied limit |
+
+If the `Link` header is missing, the last page has been reached. A page can contain fewer than `limit` objects, e.g. for very large objects.
+
+#### Example
+Example with 2500 locations: every response contains `X-Total-Count: 2500` and `X-Limit: 1000`. The client follows the `Link` header until there is none.
+
+| Page | Request | Objects | Link header of the response |
+|---|---|---|---|
+| 1 | `GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations?limit=1000` | 1–1000 | `<…/ocpi/locations?offset=1000&limit=1000>; rel="next"` |
+| 2 | `GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations?offset=1000&limit=1000` | 1001–2000 | `<…/ocpi/locations?offset=2000&limit=1000>; rel="next"` |
+| 3 | `GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations?offset=2000&limit=1000` | 2001–2500 | No Link header: last page |
+
+Locations and tariffs are updated several times a day. `last_updated` is the timestamp of the change at the CPO. A change can therefore only be retrieved after the next update, but with its original `last_updated`. If a CPO delivers late, the change appears later accordingly. If you synchronise with `date_from`, choose an overlap of 24 to 48 hours (e.g. `date_from` = last sync minus 24 hours).
+
 
 ### Origin and uniqueness
 
@@ -128,32 +154,32 @@ Since ich-tanke-strom.ch aggregates data from several CPOs, an ID alone is not g
 
 ## Locations API
 
-A location describes a physical charging site with one or more charging stations (EVSEs), each of which has one or more connectors. The endpoint returns complete location objects including EVSEs and connectors.
+A location describes a physical charging site with one or more charging points (EVSEs), each of which has one or more connectors. The endpoint returns complete location objects including EVSEs and connectors.
 
 ### Endpoints
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `BASE_URL/locations` | List of all visible locations |
-| GET | `BASE_URL/locations/{country_code}/{party_id}/{location_id}` | Single location of a CPO |
+| GET | `https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations` | List of all visible locations |
+| GET | `https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations/{country_code}/{party_id}/{location_id}` | Single location of a CPO |
 
-Base_URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi
+
 ### Get list
 
-Request:
+#### Request
 
 ```
-GET BASE_URL/locations?limit=100
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations?limit=100
 ```
 
-Response:
+#### Response
 
 * **Success**: HTTP 200. The field `data` contains an array of location objects.
 * **No results**: HTTP 200. An empty array is returned.
 * **Error**: HTTP 40x (see [Error examples](#error-examples)).
 * **Server error**: HTTP 500.
 
-Example:
+#### Example
 
 ```json
 {
@@ -252,10 +278,10 @@ Example:
 
 ### Get single object
 
-Request:
+#### Request
 
 ```
-GET BASE_URL/locations/CH/ABC/LOC-001
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations/CH/ABC/LOC-001
 ```
 
 | Path parameter | Format | Description |
@@ -264,7 +290,7 @@ GET BASE_URL/locations/CH/ABC/LOC-001
 | party_id | 3 characters | OCPI party ID of the CPO |
 | location_id | max. 36 characters | Location.id at the CPO |
 
-Response:
+#### Response
 
 ```json
 {
@@ -334,25 +360,24 @@ A tariff describes the pricing logic a CPO uses to charge for charging at a conn
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `BASE_URL/tariffs` | List of all valid tariffs |
-| GET | `BASE_URL/tariffs/{country_code}/{party_id}/{tariff_id}` | Single tariff of a CPO |
+| GET | `https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/tariffs` | List of all valid tariffs |
+| GET | `https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/tariffs/{country_code}/{party_id}/{tariff_id}` | Single tariff of a CPO |
 
-Base_URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi
 ### Get list
 
-Request:
+#### Request
 
 ```
-GET BASE_URL/tariffs?limit=100
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/tariffs?limit=100
 ```
 
-Response:
+#### Response
 
 * **Success**: HTTP 200. The field `data` contains an array of tariff objects. The `limit` parameter works the same way as for locations.
 * **Error**: HTTP 40x (see [Error examples](#error-examples)).
 * **Server error**: HTTP 500.
 
-Example:
+#### Example
 
 ```json
 {
@@ -413,10 +438,10 @@ Example:
 
 ### Get single object
 
-Request:
+#### Request
 
 ```
-GET Base_URL/tariffs/CH/ABC/TARIFF-DC-01
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/tariffs/CH/ABC/TARIFF-DC-01
 ```
 
 | Path parameter | Format | Description |
@@ -425,7 +450,7 @@ GET Base_URL/tariffs/CH/ABC/TARIFF-DC-01
 | party_id | 3 characters | OCPI party ID of the CPO |
 | tariff_id | max. 36 characters | Tariff.id at the CPO |
 
-Response:
+#### Response
 
 ```json
 {
@@ -472,32 +497,31 @@ Response:
 
 ## EVSE Status API
 
-This module provides the current occupancy or operating status of individual EVSEs (e.g. `AVAILABLE`, `CHARGING`, `OUTOFORDER`). While locations and tariffs describe the static master data of a charging station, this module makes the dynamic availability accessible in real time. The API supports direct access to a status via location and EVSE, as well as querying all current status values received since a given point in time.
+This module provides the current occupancy or operating status of individual EVSEs (e.g. `AVAILABLE`, `CHARGING`, `OUTOFORDER`). While locations and tariffs describe the static master data of a charging point, this module makes the dynamic availability accessible in real time. The API supports direct access to a status via location and EVSE, as well as querying all current status values received since a given point in time.
 
 ### Endpoints
 
 | Method | Path | Description |
 |---|---|---|
-| GET | `Base_URL/status/{country_code}/{party_id}/{location_id}/evses/{evse_uid}` | Get the current status of an EVSE |
-| GET | `Base_URL/status?date_from={date_from}&limit={limit}` | Current status values since `date_from` |
+| GET | `https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/status/{country_code}/{party_id}/{location_id}/evses/{evse_uid}` | Get the current status of an EVSE |
+| GET | `https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/status?date_from={date_from}&limit={limit}` | Current status values since `date_from` |
 
-Base_URL: https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi
 
 ### Get single status
 
-Request:
+#### Request
 
 ```
-GET Base_URL/status/CH/GFS/78594/evses/251674
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/status/CH/GFS/78594/evses/251674
 ```
 
-Response:
+#### Response
 
 * **Success**: HTTP 200. The response contains the currently stored status record of the EVSE.
 * **Error**: HTTP 40x (see [Error examples](#error-examples)).
 * **Server error**: HTTP 500.
 
-Example:
+#### Example
 
 ```json
 {
@@ -513,10 +537,10 @@ Example:
 
 ### Get status values since a point in time
 
-Request:
+#### Request
 
 ```
-GET Base_URL/status?date_from=2026-08-20T15:30:00Z&limit=100
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/status?date_from=2026-08-20T15:30:00Z&limit=100
 ```
 
 | Parameter | Type | Required | Description |
@@ -524,13 +548,13 @@ GET Base_URL/status?date_from=2026-08-20T15:30:00Z&limit=100
 | date_from | DateTime | Yes | Only records with `_received_at` greater than or equal to this UTC timestamp |
 | limit | Integer | No | Maximum number |
 
-Response:
+#### Response
 
 * **Success**: HTTP 200. The response contains an array of the currently stored EVSE status records whose `received_at` is at or after `date_from`.
 * **Error**: HTTP 40x (see [Error examples](#error-examples)).
 * **Server error**: HTTP 500.
 
-Example:
+#### Example
 
 ```json
 {
@@ -643,19 +667,19 @@ sequenceDiagram
 
 | Step | Request / action | Description |
 |---|---|---|
-| 1. Load locations | `GET /locations?limit=100` | Query all location data from ich-tanke-strom.ch. The location data also contains the initial status information. |
-| 2. Load tariffs | `GET /tariffs?limit=100` | Query all tariff data from ich-tanke-strom.ch. |
+| 1. Load locations | `GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations?limit=100` | Query all location data from ich-tanke-strom.ch. The location data also contains the initial status information. |
+| 2. Load tariffs | `GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/tariffs?limit=100` | Query all tariff data from ich-tanke-strom.ch. |
 | 3. Link | Map `Connector.tariff_ids` to tariffs using the CPO identity | Link the tariffs to the locations via the CPO identity so that tariffs are shown at the right place. |
 | 4. Single status | Get status via location and EVSE UID | Query the status of a specific EVSE of a location. |
-| 5. Status changes | `GET /status?date_from={last_sync}&limit=100` | Get status changes since a defined point in time to keep the status information up to date. |
+| 5. Status changes | `GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/status?date_from={last_sync}&limit=100` | Get status changes since a defined point in time to keep the status information up to date. |
 
 ### Example requests
 
 ```
-GET Base_URL/locations?limit=100
-GET Base_URL/tariffs?limit=100
-GET Base_URL/status/CH/GFS/78594/evses/251674
-GET Base_URL/status?date_from=2026-08-20T15:30:00Z&limit=100
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/locations?limit=100
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/tariffs?limit=100
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/status/CH/GFS/78594/evses/251674
+GET https://api.emobility-prod.prometheon.bfe.admin.ch/ocpi/status?date_from=2026-08-20T15:30:00Z&limit=100
 ```
 
 ## Non-functional requirements
