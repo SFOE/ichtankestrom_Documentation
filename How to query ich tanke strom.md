@@ -620,11 +620,15 @@ Content-Type: application/json
 
 ### Rate limit
 
-An initial technical limit may be, for example, 60 requests per minute per client. If it is exceeded, the API responds with HTTP 429 and the `Retry-After` header. The final value will be set before go-live.
+The API currently allows 2000 requests per 5 minutes per IP address. 
+If this limit is exceeded, the request is blocked by the WAF in 
+front of the API, and the response is HTTP 403 without an OCPI response body and 
+without a `Retry-After` header. Requests are accepted again as soon as the rate over 
+the last 5 minutes falls below the limit. Clients should therefore wait a few minutes 
+before retrying instead of retrying immediately.
 
 ```
-HTTP/1.1 429 Too Many Requests
-Retry-After: 30
+HTTP/1.1 403 Forbidden
 ```
 
 ## Data quality and publication rules
