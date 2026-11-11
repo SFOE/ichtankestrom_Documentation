@@ -1,8 +1,8 @@
 # List of Charging Point Operators (CPOs)
 
-## CPOs with realtime data of availability -> List to be updated
+## CPOs connected with OCPI
 
-| Operator ID | Charging Point Operator | Start Date | Included networks
+| Operator ID | Charging Point Operator | Start Date | 
 | --- | --- | --- | ---
 | CH*EPO | EPO | 10.03.2026 |
 | CH*AIL | AIL | 30.11.2022 |
@@ -26,30 +26,3 @@
 | CH*SCHARGE | S-Charge | 14.06.2021 |
 | CH*SWISSCHARGE | Swisscharge | 25.09.2019 | GoFast|
 | CH*TAE | Matterhorn Terminal Täsch | 30.11.2022 | ewz|
-
-
-## CPOs without realtime data
-
-| Operator ID | Charging Point Operator | Start Date | Included networks
-| --- | --- | --- | ---
-| CH*AVIA | AVIA | 
-| CH*DIE | Stadt Dietikon | 05.05.2020
-| CH*EBS | ebs Energie AG | 16.01.2020
-| CH*EWD | EWD Elektrizitaetswerk Davos AG | 09.09.2020
-| CH*EWO | Elektrizitätswerk Obwalden | 16.12.2019
-| CH*HER | Elektrizitätswerk Herrliberg | 01.05.2020
-| CH*ION | Ionity | 09.09.2020
-| CH*LIDL | Lidl Schweiz | 13.11.2019
-| CH*MIG | Migrol | 15.03.2021
-| CH*TES | Tesla Supercharger | 28.02.2020
-
-
-## Deactivated CPOs
-
-| Charging Point Operator | Start Date | End Date
-| --- | --- | ---
-| Backpackers Villa Sonnenhof | 10.12.2019 | 14.03.2023
-| Chocolat Frey AG | 07.11.2019 | 14.03.2023
-| Easy4you | 07.04.2020 | 01.04.2021
-| Eniwa | 25.09.2019 | 31.01.2023
-| Ost-mobil | 07.04.2020 | 01.04.2021
